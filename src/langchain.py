@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 from src.prompt_models.language_prompts import detect_language, translate_text
 from src.prompt_models.summarization import summarize_text
 from src.prompt_models.classification import detect_category, detect_sentiment
@@ -90,7 +92,7 @@ def lang_chain(
     response = {
         "ORIGINAL_TEXT": text_body,
         "TRANSLATED_TEXT": translated_text,
-        "DETECTED_LANGUAGE": detected_language,
+        "DETECTED_LANGUAGE": detected_language["DETECTED_LANGUAGE"],
         "TRANSLATED_LANGUAGE": translated_lang,
         "SUMMARIZED_TEXT": text_summary,
         "CATEGORY": text_category,

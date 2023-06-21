@@ -18,18 +18,21 @@ def named_entities(
         list: Identified entities as list
     """
     # query to detect the language
-    query = f"""
-    Detect the Named Entities from the text delimeted by ``` :
-    The text is ```{text_body}```. 
+    prompt = f"""
+    Detect the Named Entities from the text delimeted by triple quotes :
     Instructions:
-        - Format the results as JSON object should and only have "NER" as key and detected named 
-        entities as value in format as JSON child objects with Named Entity type as key 
-        e.g., "PERSON", "ORG" etc. and value as extracted named entity.
-        - Enclose property name in double quotes.
+        - Output a JSON object that contains the following key: NER
+        - Output JSON should only have "NER" as key and detected named 
+          entities as value
+        - Format the detected named entities as JSON child objects with Named Entity type as key 
+          and value as extracted named entities in list type. sample keys for named entities "PERSON", "ORG"
+        - Enclose propery name in double quotes.
+
+    Text: ```{text_body}```
     """
     
     # detect the language
-    detected_json = get_completion(query)
+    detected_json = get_completion(prompt)
     try:
         detected_dict = json.loads(detected_json)
         detected_ner = detected_dict["NER"]

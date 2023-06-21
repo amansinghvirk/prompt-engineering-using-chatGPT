@@ -16,17 +16,21 @@ def detect_language(text_body: str) -> dict:
     """
     
     # query to detect the language
-    lang_detect_query = f"""Detect the language of the delimted by ``` :
+    prompt = f"""Detect the language of the delimted by triple quotes :
     ```{text_body}```. 
     Instructions:
-        - Format the results as JSON object which should and only have "Language" as key 
-        and detected language as value. Value should be full form of detected language.
+        - Output a JSON object that contains the following key: Language
+        - Output JSON should only have "Language" as key and detected language as value.
+        - Value should be expanded form of detected language. 
+        - Enclose propery name in double quotes.    
         - Detect only single language
         - Also clean text removing special characters
-        - Expecting property name enclosed in double quotes"""
+        
+    Text: ```{text_body}```
+    """
     
     # detect the language
-    detected_lang_json = get_completion(lang_detect_query)
+    detected_lang_json = get_completion(prompt)
     
     try:
         detected_lang_dict = json.loads(detected_lang_json)
@@ -62,18 +66,20 @@ def translate_text(text_body: str, original_lang: str, translated_lang: str) -> 
     
     try:
         # query to translate the text
-        translation_query = f"""
+        prompt = f"""
         Translate the following text from {original_lang} to {translated_lang} for the text delimited
-        by ```: 
-        ```{text_body}```
+        by triple quotes: 
+        Insturctions:
             - only keep the translated text in results
+
+        Text: ```{text_body}```
         """
 
         # translate the text from original language to the specified language
 
         if ((original_lang != translated_lang)
             & (original_lang != "Not Identified")):
-            translated_text = get_completion(translation_query)
+            translated_text = get_completion(prompt)
         elif original_lang == "Not Identified":
             translated_text = ""
         else:

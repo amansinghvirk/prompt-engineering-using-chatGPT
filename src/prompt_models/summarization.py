@@ -20,21 +20,20 @@ def summarize_text(
     """
     
     # query to detect the language
-    summarization_query = f"""Summarize the text delimited by ``` in {lines} lines: 
-    ```{text_body}```. 
+    prompt = f"""Summarize the text delimited by triple quotes: 
     Instructions:
-        - Format the results as JSON object should and only have "Summary" as key 
-        and summarized text as value. 
-        - Enclose property name in double quotes."""
+        - Summarized text in {lines} lines.
+        - Output should only contains summarized text
+
+    Text: ```{text_body}```    
+    """
     
     # detect the language
-    summary_json = get_completion(summarization_query)
     try:
-        summary_json_dict = json.loads(summary_json)
-        summary = summary_json_dict["Summary"]
-    except JSONDecodeError:
-        summary = "Fail to summarize"
-    except KeyError:
-        summary = "Fail to summarize"
+        summary = get_completion(prompt)
+    except KeyError as e:
+        summary = ""
+    except Exception as e:
+        summary = ""
 
     return summary

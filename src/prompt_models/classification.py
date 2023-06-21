@@ -21,17 +21,18 @@ def detect_category(
         str: Identified category as text
     """
     # query to detect the language
-    category_detect_query = f"""Detect the category of text ``` : 
-    ```{text_body}```. 
+    prompt = f"""Detect the category from the text delimited by triple quotes : 
     Instructions:
-        - Only classify the text into following categories in list {category_list}
-        - Format the results as JSON object should and only have "Category" as key 
-        and detected category as value. 
-        -Enclose propery name in double quotes.
+        - Only classify the text into following categories provided in list {category_list}
+        - Output a JSON object that contains the following key: Category
+        - Output JSON should only have "Category" as key and detected category as value. 
+        - Enclose propery name in double quotes.
+
+    Text: ```{text_body}```
     """
     
     # detect the language
-    detected_category_json = get_completion(category_detect_query)
+    detected_category_json = get_completion(prompt)
     try:
         detected_category_dict = json.loads(detected_category_json)
         detected_category = detected_category_dict["Category"]
@@ -61,17 +62,18 @@ def detect_sentiment(
     """
     
     # query to detect the language
-    sentiment_detect_query = f"""Detect the sentiment from the text delimited by ``` :
-    ```{text_body}```
+    prompt = f"""Detect the sentiment from the text delimited by triple quotes :
     Instructions:
         - Only classify the text into following sentiment into one category out of {sentiment_list}
-        - Format the results as JSON object should and only have "Sentiment" as key 
-        and detected sentiment as value.
+        - Output a JSON object that contains the following key: Sentiment
+        - Output JSON should only have "Sentiment" as key and detected sentiment as value. 
         - Enclose property name in double quotes.
+
+    Text: ```{text_body}```
     """
     
     # detect the language
-    detected_sentiment_json = get_completion(sentiment_detect_query)
+    detected_sentiment_json = get_completion(prompt)
     try:
         detected_sentiment_dict = json.loads(detected_sentiment_json)
         detected_sentiment = detected_sentiment_dict["Sentiment"]
