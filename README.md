@@ -9,9 +9,9 @@ Model use the paid OpenAI API for using GPT3.5-turbo model. Demonstration of cod
 
 - install the required libraries using requirements.txt file
 
-<code>
+```python
 pip install -r requirements.txt
-</code>
+```
 
 - create a config.yaml file in root directory with below api key to communicate with OpenAI API:
     OPEN_AI_API_KEY: <apikey> 
