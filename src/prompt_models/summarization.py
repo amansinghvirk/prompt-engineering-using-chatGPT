@@ -21,7 +21,7 @@ def summarize_text(
     
     # query to detect the language
     prompt = f"""Summarize the text delimited by triple quotes: 
-    Instructions:
+    ### Instructions ###
         - Summarized text in {lines} lines.
         - Output should only contains summarized text
 

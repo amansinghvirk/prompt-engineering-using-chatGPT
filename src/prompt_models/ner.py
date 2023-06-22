@@ -20,7 +20,7 @@ def named_entities(
     # query to detect the language
     prompt = f"""
     Detect the Named Entities from the text delimeted by triple quotes :
-    Instructions:
+    ### Instructions ###
         - Output a JSON object that contains the following key: NER
         - Output JSON should only have "NER" as key and detected named 
           entities as value

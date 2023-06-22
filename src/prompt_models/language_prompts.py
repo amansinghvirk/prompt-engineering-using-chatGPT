@@ -18,7 +18,7 @@ def detect_language(text_body: str) -> dict:
     # query to detect the language
     prompt = f"""Detect the language of the delimted by triple quotes :
     ```{text_body}```. 
-    Instructions:
+    ### Instructions ###
         - Output a JSON object that contains the following key: Language
         - Output JSON should only have "Language" as key and detected language as value.
         - Value should be expanded form of detected language. 
@@ -69,7 +69,7 @@ def translate_text(text_body: str, original_lang: str, translated_lang: str) -> 
         prompt = f"""
         Translate the following text from {original_lang} to {translated_lang} for the text delimited
         by triple quotes: 
-        Insturctions:
+        ### Insturctions ###
             - only keep the translated text in results
 
         Text: ```{text_body}```

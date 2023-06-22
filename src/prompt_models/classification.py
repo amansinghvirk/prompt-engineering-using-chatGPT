@@ -22,7 +22,7 @@ def detect_category(
     """
     # query to detect the language
     prompt = f"""Detect the category from the text delimited by triple quotes : 
-    Instructions:
+    ### Instructions ###
         - Only classify the text into following categories provided in list {category_list}
         - Output a JSON object that contains the following key: Category
         - Output JSON should only have "Category" as key and detected category as value. 
@@ -63,7 +63,7 @@ def detect_sentiment(
     
     # query to detect the language
     prompt = f"""Detect the sentiment from the text delimited by triple quotes :
-    Instructions:
+    ### Instructions ###
         - Only classify the text into following sentiment into one category out of {sentiment_list}
         - Output a JSON object that contains the following key: Sentiment
         - Output JSON should only have "Sentiment" as key and detected sentiment as value. 

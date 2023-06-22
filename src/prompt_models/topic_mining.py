@@ -19,7 +19,7 @@ def topics(
     
     # query to detect the language
     prompt = f"""Detect the topics from the text delimited by triple quotes :
-    Instructions:
+    ### Instructions ###
         - Topic should not be longer than 3 words
         - Output a JSON object that contains the following key: Topic
         - Output JSON should only have "Topic" as key and detected topics as value in format of list. 
