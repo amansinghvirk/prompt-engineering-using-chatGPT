@@ -7,14 +7,13 @@ This project aims to demonstrate the capabilities of the Large Language Model us
 
 Model use the paid OpenAI API for using GPT3.5-turbo model. Demonstration of code is there in nlp_prompts.ipynb notebook to execute the code in notebook follow the below setup tasks:
 
+<code>
 - install the required libraries using requirements.txt file
-
-```python
-pip install -r requirements.txt
-```
-
+    $ pip install -r requirements.txt
+    
 - create a config.yaml file in root directory with below api key to communicate with OpenAI API:
-    OPEN_AI_API_KEY: <apikey> 
+    OPEN_AI_API_KEY: <apikey>
+</code>  
 
 
 ```python
@@ -201,7 +200,7 @@ model_results
      'TRANSLATED_TEXT': '"The Central Cabinet has approved a production-based incentive (PBI) scheme worth Rs 10,683 crore today to increase domestic construction and boost exports in the textile sector. Central Minister Anurag Thakur provided information about this today. This decision was taken in a cabinet meeting chaired by Prime Minister Narendra Modi. Prior to this, the Cabinet had approved the PBI scheme for 13 major sectors in the country to increase manufacturing capacity and exports. According to Central Minister Anurag Thakur, the Cabinet has approved the incentive scheme for 10 segments or products of man-made fibers, man-made fabrics, and technical textiles. Technical textiles include special fabrics used in the pharma, metal, auto, and other sectors. Their demand increased significantly during COVID, after which the government emphasized increasing their domestic production. The government estimates that this scheme will directly provide employment to 7.5 lakh people and indirectly to many more. The hope is that small towns will benefit from the scheme."',
      'DETECTED_LANGUAGE': 'Hindi',
      'TRANSLATED_LANGUAGE': 'English',
-     'SUMMARIZED_TEXT': 'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector, which will provide employment to 7.5 lakh people and benefit small towns.',
+     'SUMMARIZED_TEXT': 'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector.',
      'CATEGORY': 'News',
      'SENTIMENT': 'Positive',
      'TOPICS': ['Textile sector',
@@ -215,7 +214,16 @@ model_results
        'government'],
       'PERSON': ['Anurag Thakur', 'Narendra Modi'],
       'PRODUCT': ['man-made fibers', 'man-made fabrics', 'technical textiles'],
-      'GPE': ['Rs', 'COVID']}}
+      'LOC': ['domestic'],
+      'MISC': ['Rs 10,683 crore',
+       '13 major sectors',
+       '10 segments',
+       'pharma',
+       'metal',
+       'auto',
+       'COVID',
+       'employment',
+       'small towns']}}
 
 
 
@@ -323,8 +331,8 @@ for prompt_results in prompt_results_list:
       in the textile industry, with a total of 4445 crore rupees to be spent on these
       parks in 5 years.
     TOPICS:
-    - Textile Industry
-    - Employment Opportunities
+    - Textile Parks
+    - Employment
     - Investment
     TRANSLATED_LANGUAGE: English
     TRANSLATED_TEXT: '"The Central Cabinet has approved the proposal to establish seven
@@ -334,7 +342,7 @@ for prompt_results in prompt_results_list:
       of 7 mega integrated textile region and apparel (PM-MITRA) parks was approved. A
       total of 4445 crore rupees will be spent on these parks in 5 years. Central Minister
       Piyush Goyal said in a press conference that a provision of 4445 crore rupees has
-      been made for the PM-MITRA scheme for a period of five years. This decision is inspired
+      been made for a period of five years for the PM-MITRA scheme. This decision is inspired
       by PM Modi''s 5F vision, which is Farm to Fiber to Factory to Fashion to Foreign."'
     
     
