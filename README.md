@@ -7,13 +7,16 @@ This project aims to demonstrate the capabilities of the Large Language Model us
 
 Model use the paid OpenAI API for using GPT3.5-turbo model. Demonstration of code is there in nlp_prompts.ipynb notebook to execute the code in notebook follow the below setup tasks:
 
-<code>
+
 - install the required libraries using requirements.txt file
-    $ pip install -r requirements.txt
     
+```python
+pip install -r requirements.txt
+```
+
 - create a config.yaml file in root directory with below api key to communicate with OpenAI API:
     OPEN_AI_API_KEY: <apikey>
-</code>  
+ 
 
 
 ```python
