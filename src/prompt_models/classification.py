@@ -27,9 +27,6 @@ def detect_category(
     prompt = f"""Detect the category from the text delimited by triple quotes : 
     ### Instructions ###
         - Only classify the text into following categories provided in list {category_list}
-        - Output a JSON object that contains the following key: Category
-        - Output JSON should only have "Category" as key and detected category as value. 
-        - Enclose propery name in double quotes.
 
     Text: ```{text_body}```
     """
