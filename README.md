@@ -179,7 +179,9 @@ text_ner
       'government'],
      'PERSON': ['Anurag Thakur', 'Narendra Modi'],
      'PRODUCT': ['man-made fibers', 'man-made fabrics', 'technical textiles'],
-     'LOC': ['COVID']}
+     'MISC': ['Rs 10,683 crore', 'COVID'],
+     'LOC': ['small towns'],
+     'TIME': ['today']}
 
 
 
@@ -207,12 +209,12 @@ model_results
      'TRANSLATED_TEXT': '"The Central Cabinet has approved a production-based incentive (PBI) scheme worth Rs 10,683 crore today to increase domestic construction and boost exports in the textile sector. Central Minister Anurag Thakur provided information about this today. This decision was taken in a cabinet meeting chaired by Prime Minister Narendra Modi. Prior to this, the Cabinet had approved the PBI scheme for 13 major sectors in the country to increase manufacturing capacity and exports. According to Central Minister Anurag Thakur, the Cabinet has approved the incentive scheme for 10 segments or products of man-made fibers, man-made fabrics, and technical textiles. Technical textiles include special fabrics used in the pharma, metal, auto, and other sectors. Their demand increased significantly during COVID, after which the government emphasized increasing their domestic production. The government estimates that this scheme will directly provide employment to 7.5 lakh people and indirectly to many more. The hope is that small towns will benefit from the scheme."',
      'DETECTED_LANGUAGE': 'Hindi',
      'TRANSLATED_LANGUAGE': 'English',
-     'SUMMARIZED_TEXT': 'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector, which will provide employment to 7.5 lakh people and benefit small towns.',
+     'SUMMARIZED_TEXT': '',
      'CATEGORY': 'News',
      'SENTIMENT': 'Positive',
-     'TOPICS': ['Textile Sector',
-      'Production Incentive Scheme',
-      'Technical Textiles'],
+     'TOPICS': ['Textile sector',
+      'Production-based incentive',
+      'Technical textiles'],
      'NER': {'ORG': ['Central Cabinet',
        'PBI',
        'Central Minister',
@@ -221,7 +223,16 @@ model_results
        'government'],
       'PERSON': ['Anurag Thakur', 'Narendra Modi'],
       'PRODUCT': ['man-made fibers', 'man-made fabrics', 'technical textiles'],
-      'LOC': ['COVID']}}
+      'LOC': ['domestic'],
+      'MISC': ['Rs 10,683 crore',
+       '13 major sectors',
+       '10 segments',
+       'pharma',
+       'metal',
+       'auto',
+       'COVID',
+       'employment',
+       'small towns']}}
 
 
 
@@ -343,8 +354,8 @@ for prompt_results in prompt_results_list:
       \ parks was approved. A total of 4445 crore rupees will be spent on these parks\
       \ in 5 years. Central Minister Piyush Goyal said in a press conference that a provision\
       \ of 4445 crore rupees has been made for a period of five years for the PM-MITRA\
-      \ scheme. This decision is inspired by PM Modi's 5F vision, which is Farm to Fiber,\
-      \ Factory to Fashion, and Foreign.\""
+      \ scheme. This decision is inspired by PM Modi's 5F vision, which is Farm to Fiber\
+      \ to Factory to Fashion to Foreign.\""
     
     
     
@@ -368,21 +379,21 @@ for prompt_results in prompt_results_list:
     DETECTED_LANGUAGE: Punjabi
     NER:
       ORG:
-      - Fiji
       - Companion of the Order of Fiji
-      - Palau
+      - Prime Minister of Fiji
+      - President of Palau
       - Order of the Rising Sun
       - Papua New Guinea
       - Companion of the Order of Logohu
-      - Forum for India-Pacific Islands Cooperation
+      - Forum for India-Pacific Island Cooperation
       - FIPIC
       PERSON:
       - Narendra Modi
-      - Sitiavani Rabuka
+      - Sitavanini Rabuka
     SENTIMENT: Positive
     SUMMARIZED_TEXT: Prime Minister Narendra Modi has been honored with the highest honor
-      of Fiji, the 'Companion of the Order of Fiji', and the Order of the Rising Sun by
-      the Prime Minister of Palau during his visit to Papua New Guinea.
+      in Fiji, the 'Companion of the Order of Fiji', and also received an award from the
+      President of Palau during his visit to Papua New Guinea.
     TOPICS:
     - Honors
     - Narendra Modi
@@ -393,21 +404,21 @@ for prompt_results in prompt_results_list:
       - only keep the translated text in results
     
     
-      Text: "Prime Minister Narendra Modi has been honored with the highest honor of Fiji.
-      PM Modi has been honored with the highest honor of Fiji, the ''Companion of the
-      Order of Fiji'', by Fiji''s Prime Minister Sitiavani Rabuka. However, so far only
-      a few non-Fijian people have received this honor. Along with this, the Prime Minister
+      Text: "Prime Minister Narendra Modi has been honored with the highest honor in Fiji.
+      PM Modi has been honored with the highest honor in Fiji, the ''Companion of the
+      Order of Fiji'', by the Prime Minister of Fiji, Sitavanini Rabuka. However, so far
+      only a few non-Fijian people have received this honor. Along with this, the President
       of Palau also honored PM Narendra Modi. The Republic of Palau has now been honored
-      with the Order of the Rising Sun. Both of these awards were given to PM Modi only
-      during his visit to Papua New Guinea.
+      with the Order of the Rising Sun. Both these awards were given to PM Modi only during
+      his visit to Papua New Guinea.
     
     
       Papua New Guinea has honored Prime Minister Narendra Modi with the ''Companion of
       the Order of Logohu'' for supporting the unity of peaceful Pacific countries and
       leading global South. Few people from other countries have received this award.
-      Along with this, Prime Minister Narendra Modi has organized a vegetarian banquet
-      for the leaders of the Forum for India-Pacific Islands Cooperation (FIPIC) during
-      the afternoon session."'
+      Along with this, during the lunch organized for the leaders of the Forum for India-Pacific
+      Island Cooperation (FIPIC) by Prime Minister Narendra Modi, a vegetarian feast will
+      be served."'
     
     
     
@@ -432,19 +443,20 @@ for prompt_results in prompt_results_list:
       - May 22
       - '2023'
       ORG:
+      - India
       - Royal Challengers Bangalore
       - Bengal
       - Punjab
+      - Gujarat Titans
       - IPL
       PERSON:
       - Sourav Ganguly
       - Virat Kohli
       - Maharaj
       - Shubman Gill
-      - Gujarat Titans
     SENTIMENT: Neutral
-    SUMMARIZED_TEXT: '"After a tweet from Sourav Ganguly following a cricket match, there
-      has been controversy surrounding the relationship between him and Virat Kohli."'
+    SUMMARIZED_TEXT: '"After a tweet from Sourav Ganguly, there has been controversy surrounding
+      the distance between him and Virat Kohli."'
     TOPICS:
     - Cricket
     - Controversy
@@ -452,7 +464,7 @@ for prompt_results in prompt_results_list:
     TRANSLATED_LANGUAGE: English
     TRANSLATED_TEXT: '"Okay, has the distance between Sourav Ganguly and Virat Kohli decreased?
       Has the Maharaj forgiven ''King Kohli''? After seeing the new tweet from India''s
-      former leader, the netizens are getting a different vibe. But why has there been
+      former leader, the netizens are getting a different scent. But why has there been
       a controversy surrounding Sourav''s new tweet?
     
     
@@ -460,7 +472,7 @@ for prompt_results in prompt_results_list:
       Bangalore defeated Bengal. In response, Shubman Gill came to bat and showed his
       skills. He remained unbeaten at 104 runs in just 52 balls, leading Punjab to victory.
       As a result, Gujarat Titans not only lost the match by 6 wickets but also eliminated
-      from the upcoming IPL 2023. After the match, Sourav tweeted, and that''s where the
-      new controversy began."'
+      from the upcoming IPL 2023, leaving RCB behind. After the match, Sourav tweeted,
+      and that''s where the new controversy began."'
     
     
