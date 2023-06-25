@@ -78,8 +78,12 @@ def translate_text(
         prompt = f"""
         Translate the following text from {original_lang} to {translated_lang} for the text delimited
         by triple quotes: 
+
         ### Insturctions ###
             - only keep the translated text in results
+            - Output a JSON object that contains the following key: Translation
+            - Output JSON should only have "Translation" as key and translated text as value. 
+            - Enclose propery name in double quotes.
 
         Text: ```{text_body}```
         """
@@ -88,7 +92,16 @@ def translate_text(
 
         if ((original_lang != translated_lang)
             & (original_lang != "Not Identified")):
-            translated_text = get_completion(prompt, model)
+            # detect the language
+            translated_json = get_completion(prompt, model)
+    
+            try:
+                translated_dict = json.loads(translated_json)
+                translated_text = translated_dict["Translation"]
+            except JSONDecodeError:
+                translated_text = ""
+            except KeyError:
+                translated_text = ""
         elif original_lang == "Not Identified":
             translated_text = ""
         else:

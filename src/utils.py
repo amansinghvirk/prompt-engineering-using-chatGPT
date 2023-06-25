@@ -11,8 +11,6 @@ def open_ai_key():
 
 def get_completion(prompt:str, model = "gpt-3.5-turbo"):
     messages = [{
-        "role": "assistant",
-        "content": "You are Natural Language Processing Model. Your role is assist in assisting the NLP tasks.",
         "role": "user", 
         "content": prompt
     }]
