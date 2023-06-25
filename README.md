@@ -1,5 +1,5 @@
 # Prompt Engineering for NLP tasks
-Demonstration of how prompt engineering can be used for LLM models to use specific NLP tasks
+Demonstration of how prompt engineering can be used for LLM models to solve specific NLP tasks
 
 This project aims to demonstrate the capabilities of the Large Language Model using Prompt Engineering and Language Chain techniques. By leveraging models like GPT3.5-turbo, we can solve multiple Natural Language Processing tasks without the need for separate models. The tasks include language identification, translation, text summarization, classification, sentiment detection, topic mining, and named entity recognition. These large language models have been trained on diverse language corpora and can efficiently handle various language-related tasks.
 
