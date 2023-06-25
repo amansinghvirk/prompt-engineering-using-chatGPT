@@ -5,7 +5,8 @@ from  src.utils import get_completion
 
 def summarize_text(
     text_body,
-    lines=1
+    lines=1,
+    model="gpt-3.5-turbo"
 ) -> str:
     """Summarize the text
     
@@ -15,6 +16,8 @@ def summarize_text(
             text to be summarized
         lines: int
             required number of lines in summarized text
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Returns:
         str: Summary as text
     """
@@ -30,7 +33,7 @@ def summarize_text(
     
     # detect the language
     try:
-        summary = get_completion(prompt)
+        summary = get_completion(prompt, model)
     except KeyError as e:
         summary = ""
     except Exception as e:

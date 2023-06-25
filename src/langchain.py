@@ -7,10 +7,12 @@ from src.prompt_models.topic_mining import topics
 from src.prompt_models.ner import named_entities
 
 def lang_chain(
-        text_body: str, translated_lang=None, 
+        text_body: str, 
+        translated_lang=None, 
         text_category_list=["News", "Review", "Tweet", "General",
                         "Article", "Scientific Paper", "Other"],
-        text_sentiment_list=["Positive", "Neutral", "Negative"]
+        text_sentiment_list=["Positive", "Neutral", "Negative"],
+        model="gpt-3.5-turbo"
     ) -> dict:
     """function apply the language chain on given text 
        and returns back a dictionary with following results
@@ -32,6 +34,8 @@ def lang_chain(
                 List of Categories for the classification
             text_category_list: list
                 List of sentiments for the sentiment classification
+            model: str
+                chat GPT model either gpt-3.5-turbo or gpt-4
     
         Return:
         -------
@@ -39,7 +43,7 @@ def lang_chain(
     """
     
     # Detect the language of text
-    detected_language = detect_language(text_body)
+    detected_language = detect_language(text_body, model=model)
 
     # Translate the text if translated_lang is not none
     if translated_lang is not None:
@@ -47,7 +51,8 @@ def lang_chain(
             translated_text = translate_text(
                 text_body, 
                 original_lang=detected_language["DETECTED_LANGUAGE"], 
-                translated_lang=translated_lang
+                translated_lang=translated_lang,
+                model=model
             )
             translated_text = translated_text["TRANSLATED_TEXT"]
         except JSONDecodeError:
@@ -63,29 +68,34 @@ def lang_chain(
     # summarize the text
     text_summary = summarize_text(
         text_body=translated_text,
-        lines=1
+        lines=1,
+        model=model
     )
 
     # Classify text into the category
     text_category = detect_category(
         text_body=translated_text,
-        category_list=text_category_list
+        category_list=text_category_list,
+        model=model
     )
 
     # Classify text sentimets
     text_sentiment = detect_sentiment(
         text_body=translated_text,
-        sentiment_list=text_sentiment_list
+        sentiment_list=text_sentiment_list,
+        model=model
     )
 
     # Detect topics from the text
     text_topics = topics(
-        text_body=translated_text
+        text_body=translated_text,
+        model=model
     )
 
     # Detect the named entities from the text
     text_ner = named_entities(
-        text_body=translated_text
+        text_body=translated_text,
+        model=model
     )
 
 

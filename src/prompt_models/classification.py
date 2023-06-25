@@ -6,7 +6,8 @@ from  src.utils import get_completion
 def detect_category(
     text_body: str, 
     category_list=["News", "Review", "Tweet", "General",
-                   "Article", "Scientific Paper", "Other"]
+                   "Article", "Scientific Paper", "Other"],
+    model="gpt-3.5-turbo"
 ) -> str:
     """Classify the text in defined categories
     
@@ -16,6 +17,8 @@ def detect_category(
             text to be classified
         category_list: list 
             list of category labels to be used for classification
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Return:
     -------
         str: Identified category as text
@@ -32,7 +35,7 @@ def detect_category(
     """
     
     # detect the language
-    detected_category_json = get_completion(prompt)
+    detected_category_json = get_completion(prompt, model)
     try:
         detected_category_dict = json.loads(detected_category_json)
         detected_category = detected_category_dict["Category"]
@@ -46,7 +49,8 @@ def detect_category(
 
 def detect_sentiment(
     text_body: str, 
-    sentiment_list=["Positive", "Neutral", "Negative"]
+    sentiment_list=["Positive", "Neutral", "Negative"],
+    model="gpt-3.5-turbo"
 ) -> str:
     """Identify the sentiment from the text
     
@@ -56,6 +60,8 @@ def detect_sentiment(
             text to be classified
         sentiment_list: list 
             list of sentiments to be used for classification
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Return:
     -------
         str: Identified sentiment as text
@@ -73,7 +79,7 @@ def detect_sentiment(
     """
     
     # detect the language
-    detected_sentiment_json = get_completion(prompt)
+    detected_sentiment_json = get_completion(prompt, model)
     try:
         detected_sentiment_dict = json.loads(detected_sentiment_json)
         detected_sentiment = detected_sentiment_dict["Sentiment"]

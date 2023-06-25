@@ -3,13 +3,15 @@ from json import JSONDecodeError
 
 from  src.utils import get_completion
 
-def detect_language(text_body: str) -> dict:
+def detect_language(text_body: str, model="gpt-3.5-turbo") -> dict:
     """returns the identified language
     
     Parameters:
     ----------
         text_body: str 
             text for which language needs to be detected
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Return:
     ------
         dict: dictionary with key-value
@@ -30,7 +32,7 @@ def detect_language(text_body: str) -> dict:
     """
     
     # detect the language
-    detected_lang_json = get_completion(prompt)
+    detected_lang_json = get_completion(prompt, model)
     
     try:
         detected_lang_dict = json.loads(detected_lang_json)
@@ -47,7 +49,12 @@ def detect_language(text_body: str) -> dict:
     return result
 
 
-def translate_text(text_body: str, original_lang: str, translated_lang: str) -> dict:
+def translate_text(
+        text_body: str, 
+        original_lang: str, 
+        translated_lang: str, 
+        model="gpt-3.5-turbo"
+    ) -> dict:
     """returns the translated text from original to required language if 
        original language is different from translated language
     
@@ -59,6 +66,8 @@ def translate_text(text_body: str, original_lang: str, translated_lang: str) -> 
             original language of the text
         translated_lang: str
             Language in which text needs to be translated
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Return:
     ------
         dict: dictionary with key-value
@@ -79,7 +88,7 @@ def translate_text(text_body: str, original_lang: str, translated_lang: str) -> 
 
         if ((original_lang != translated_lang)
             & (original_lang != "Not Identified")):
-            translated_text = get_completion(prompt)
+            translated_text = get_completion(prompt, model)
         elif original_lang == "Not Identified":
             translated_text = ""
         else:

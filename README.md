@@ -7,16 +7,13 @@ This project aims to demonstrate the capabilities of the Large Language Model us
 
 Model use the paid OpenAI API for using GPT3.5-turbo model. Demonstration of code is there in nlp_prompts.ipynb notebook to execute the code in notebook follow the below setup tasks:
 
-
+<code>
 - install the required libraries using requirements.txt file
+    $ pip install -r requirements.txt
     
-```python
-pip install -r requirements.txt
-```
-
 - create a config.yaml file in root directory with below api key to communicate with OpenAI API:
     OPEN_AI_API_KEY: <apikey>
- 
+</code>  
 
 
 ```python
@@ -53,7 +50,7 @@ text = """टेक्सटाइल सेक्टर में घरेल�
 
 
 ```python
-detected_language = detect_language(text_body=text)
+detected_language = detect_language(text_body=text, model="gpt-3.5-turbo")
 detected_language
 ```
 
@@ -71,7 +68,8 @@ detected_language
 translated_text = translate_text(
     text_body=text, 
     original_lang=detected_language["DETECTED_LANGUAGE"], 
-    translated_lang="English"
+    translated_lang="English",
+    model="gpt-3.5-turbo"
 )
 translated_text
 ```
@@ -89,7 +87,8 @@ translated_text
 ```python
 text_summary = summarize_text(
     text_body=translated_text["TRANSLATED_TEXT"],
-    lines=1
+    lines=1,
+    model="gpt-3.5-turbo"
 )
 text_summary
 ```
@@ -97,7 +96,7 @@ text_summary
 
 
 
-    'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector.'
+    'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector, which will provide employment to 7.5 lakh people and benefit small towns.'
 
 
 
@@ -108,7 +107,8 @@ text_summary
 text_category = detect_category(
     text_body=translated_text["TRANSLATED_TEXT"],
     category_list=["News", "Review", "Tweet", "General",
-                   "Article", "Scientific Paper", "Other"]
+                   "Article", "Scientific Paper", "Other"],
+    model="gpt-3.5-turbo"
 )
 text_category
 ```
@@ -126,7 +126,8 @@ text_category
 ```python
 text_sentiment = detect_sentiment(
     text_body=translated_text["TRANSLATED_TEXT"],
-    sentiment_list=["Positive", "Neutral", "Negative"]
+    sentiment_list=["Positive", "Neutral", "Negative"],
+    model="gpt-3.5-turbo"
 )
 text_sentiment
 ```
@@ -143,7 +144,8 @@ text_sentiment
 
 ```python
 text_topics = topics(
-    text_body=translated_text["TRANSLATED_TEXT"]
+    text_body=translated_text["TRANSLATED_TEXT"],
+    model="gpt-3.5-turbo"
 )
 text_topics
 ```
@@ -151,7 +153,7 @@ text_topics
 
 
 
-    ['Textile sector', 'Production-based incentive', 'Technical textiles']
+    ['Textile Sector', 'Production Incentive Scheme', 'Technical Textiles']
 
 
 
@@ -160,7 +162,8 @@ text_topics
 
 ```python
 text_ner = named_entities(
-    text_body=translated_text["TRANSLATED_TEXT"]
+    text_body=translated_text["TRANSLATED_TEXT"],
+    model="gpt-3.5-turbo"
 )
 text_ner
 ```
@@ -176,7 +179,7 @@ text_ner
       'government'],
      'PERSON': ['Anurag Thakur', 'Narendra Modi'],
      'PRODUCT': ['man-made fibers', 'man-made fabrics', 'technical textiles'],
-     'GPE': ['Rs', 'COVID']}
+     'LOC': ['COVID']}
 
 
 
@@ -191,7 +194,8 @@ model_results = lang_chain(
     translated_lang="English", 
     text_category_list=["News", "Review", "Tweet", "General",
                         "Article", "Scientific Paper", "Other"],
-    text_sentiment_list=["Positive", "Neutral", "Negative"]
+    text_sentiment_list=["Positive", "Neutral", "Negative"],
+    model="gpt-3.5-turbo"
 )
 model_results
 ```
@@ -203,12 +207,12 @@ model_results
      'TRANSLATED_TEXT': '"The Central Cabinet has approved a production-based incentive (PBI) scheme worth Rs 10,683 crore today to increase domestic construction and boost exports in the textile sector. Central Minister Anurag Thakur provided information about this today. This decision was taken in a cabinet meeting chaired by Prime Minister Narendra Modi. Prior to this, the Cabinet had approved the PBI scheme for 13 major sectors in the country to increase manufacturing capacity and exports. According to Central Minister Anurag Thakur, the Cabinet has approved the incentive scheme for 10 segments or products of man-made fibers, man-made fabrics, and technical textiles. Technical textiles include special fabrics used in the pharma, metal, auto, and other sectors. Their demand increased significantly during COVID, after which the government emphasized increasing their domestic production. The government estimates that this scheme will directly provide employment to 7.5 lakh people and indirectly to many more. The hope is that small towns will benefit from the scheme."',
      'DETECTED_LANGUAGE': 'Hindi',
      'TRANSLATED_LANGUAGE': 'English',
-     'SUMMARIZED_TEXT': 'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector.',
+     'SUMMARIZED_TEXT': 'The Central Cabinet has approved a production-based incentive scheme worth Rs 10,683 crore to increase domestic construction and boost exports in the textile sector, which will provide employment to 7.5 lakh people and benefit small towns.',
      'CATEGORY': 'News',
      'SENTIMENT': 'Positive',
-     'TOPICS': ['Textile sector',
-      'Production-based incentive',
-      'Technical textiles'],
+     'TOPICS': ['Textile Sector',
+      'Production Incentive Scheme',
+      'Technical Textiles'],
      'NER': {'ORG': ['Central Cabinet',
        'PBI',
        'Central Minister',
@@ -217,16 +221,7 @@ model_results
        'government'],
       'PERSON': ['Anurag Thakur', 'Narendra Modi'],
       'PRODUCT': ['man-made fibers', 'man-made fabrics', 'technical textiles'],
-      'LOC': ['domestic'],
-      'MISC': ['Rs 10,683 crore',
-       '13 major sectors',
-       '10 segments',
-       'pharma',
-       'metal',
-       'auto',
-       'COVID',
-       'employment',
-       'small towns']}}
+      'LOC': ['COVID']}}
 
 
 
@@ -284,7 +279,8 @@ for idx, text in enumerate(text_list):
         translated_lang="English", 
         text_category_list=["News", "Review", "Tweet", "General",
                             "Article", "Scientific Paper", "Other"],
-        text_sentiment_list=["Positive", "Neutral", "Negative"]
+        text_sentiment_list=["Positive", "Neutral", "Negative"],
+        model="gpt-3.5-turbo"
     )
     prompt_results_list.append(model_results)    
 ```
@@ -334,19 +330,21 @@ for prompt_results in prompt_results_list:
       in the textile industry, with a total of 4445 crore rupees to be spent on these
       parks in 5 years.
     TOPICS:
-    - Textile Parks
-    - Employment
+    - Textile Industry
+    - Employment Opportunities
     - Investment
     TRANSLATED_LANGUAGE: English
-    TRANSLATED_TEXT: '"The Central Cabinet has approved the proposal to establish seven
-      mega integrated textile parks to increase employment opportunities and attract investment
-      in the textile industry. The meeting of the Central Cabinet was held on Wednesday
-      under the chairmanship of Prime Minister Narendra Modi, in which the establishment
-      of 7 mega integrated textile region and apparel (PM-MITRA) parks was approved. A
-      total of 4445 crore rupees will be spent on these parks in 5 years. Central Minister
-      Piyush Goyal said in a press conference that a provision of 4445 crore rupees has
-      been made for a period of five years for the PM-MITRA scheme. This decision is inspired
-      by PM Modi''s 5F vision, which is Farm to Fiber to Factory to Fashion to Foreign."'
+    TRANSLATED_TEXT: "### Instructions ###\n            - only keep the translated text\
+      \ in results\n\n        Text: \"The Central Cabinet has approved the proposal to\
+      \ establish seven mega integrated textile parks to increase employment opportunities\
+      \ and attract investment in the textile industry. The meeting of the Central Cabinet\
+      \ was held on Wednesday under the chairmanship of Prime Minister Narendra Modi,\
+      \ in which the establishment of 7 mega integrated textile region and apparel (PM-MITRA)\
+      \ parks was approved. A total of 4445 crore rupees will be spent on these parks\
+      \ in 5 years. Central Minister Piyush Goyal said in a press conference that a provision\
+      \ of 4445 crore rupees has been made for a period of five years for the PM-MITRA\
+      \ scheme. This decision is inspired by PM Modi's 5F vision, which is Farm to Fiber,\
+      \ Factory to Fashion, and Foreign.\""
     
     
     
@@ -370,9 +368,9 @@ for prompt_results in prompt_results_list:
     DETECTED_LANGUAGE: Punjabi
     NER:
       ORG:
+      - Fiji
       - Companion of the Order of Fiji
-      - Prime Minister
-      - Republic of Palau
+      - Palau
       - Order of the Rising Sun
       - Papua New Guinea
       - Companion of the Order of Logohu
@@ -382,29 +380,34 @@ for prompt_results in prompt_results_list:
       - Narendra Modi
       - Sitiavani Rabuka
     SENTIMENT: Positive
-    SUMMARIZED_TEXT: PM Modi honored with highest honor in Fiji and Palau, and also received
-      the 'Companion of the Order of Logohu' from Papua New Guinea for supporting peaceful
-      Pacific countries and leading global South.
+    SUMMARIZED_TEXT: Prime Minister Narendra Modi has been honored with the highest honor
+      of Fiji, the 'Companion of the Order of Fiji', and the Order of the Rising Sun by
+      the Prime Minister of Palau during his visit to Papua New Guinea.
     TOPICS:
-    - Honored
+    - Honors
+    - Narendra Modi
     - Fiji
-    - Palau
     TRANSLATED_LANGUAGE: English
-    TRANSLATED_TEXT: '"Prime Minister Narendra Modi has been honored with the highest
-      honor in Fiji. PM Modi has been honored with the highest honor in Fiji, the ''Companion
-      of the Order of Fiji'', by Fiji''s Prime Minister Sitiavani Rabuka. However, so
-      far only a few non-Fijian people have received this honor. Along with this, the
-      Prime Minister of Palau also honored PM Narendra Modi. The Republic of Palau has
-      now been honored with the Order of the Rising Sun. Both of these awards were presented
-      to PM Modi only in Papua New Guinea.
+    TRANSLATED_TEXT: '### Instructions ###
+    
+      - only keep the translated text in results
+    
+    
+      Text: "Prime Minister Narendra Modi has been honored with the highest honor of Fiji.
+      PM Modi has been honored with the highest honor of Fiji, the ''Companion of the
+      Order of Fiji'', by Fiji''s Prime Minister Sitiavani Rabuka. However, so far only
+      a few non-Fijian people have received this honor. Along with this, the Prime Minister
+      of Palau also honored PM Narendra Modi. The Republic of Palau has now been honored
+      with the Order of the Rising Sun. Both of these awards were given to PM Modi only
+      during his visit to Papua New Guinea.
     
     
       Papua New Guinea has honored Prime Minister Narendra Modi with the ''Companion of
       the Order of Logohu'' for supporting the unity of peaceful Pacific countries and
       leading global South. Few people from other countries have received this award.
-      Along with this, Prime Minister Narendra Modi will inaugurate the Bazaar in the
-      afternoon organized for the leaders of the Forum for India-Pacific Islands Cooperation
-      (FIPIC)."'
+      Along with this, Prime Minister Narendra Modi has organized a vegetarian banquet
+      for the leaders of the Forum for India-Pacific Islands Cooperation (FIPIC) during
+      the afternoon session."'
     
     
     
@@ -425,12 +428,14 @@ for prompt_results in prompt_results_list:
     DETECTED_LANGUAGE: Bengali
     NER:
       DATE:
-      - Sunday, May 22
+      - Sunday
+      - May 22
+      - '2023'
       ORG:
       - Royal Challengers Bangalore
       - Bengal
       - Punjab
-      - IPL 2023
+      - IPL
       PERSON:
       - Sourav Ganguly
       - Virat Kohli
@@ -438,18 +443,17 @@ for prompt_results in prompt_results_list:
       - Shubman Gill
       - Gujarat Titans
     SENTIMENT: Neutral
-    SUMMARIZED_TEXT: Has the distance between Sourav Ganguly and Virat Kohli decreased?
-      A controversy surrounding Sourav's new tweet after Virat remained unbeaten at 101
-      runs and Shubman Gill led Punjab to victory.
+    SUMMARIZED_TEXT: '"After a tweet from Sourav Ganguly following a cricket match, there
+      has been controversy surrounding the relationship between him and Virat Kohli."'
     TOPICS:
     - Cricket
     - Controversy
     - Social Media
     TRANSLATED_LANGUAGE: English
-    TRANSLATED_TEXT: '```Has the distance between Sourav Ganguly and Virat Kohli decreased?
-      Has the Maharaj forgiven ''King Kohli''? After seeing the tweet of India''s former
-      leader, the netizens are getting a different scent. But why has there been a controversy
-      surrounding Sourav''s new tweet?
+    TRANSLATED_TEXT: '"Okay, has the distance between Sourav Ganguly and Virat Kohli decreased?
+      Has the Maharaj forgiven ''King Kohli''? After seeing the new tweet from India''s
+      former leader, the netizens are getting a different vibe. But why has there been
+      a controversy surrounding Sourav''s new tweet?
     
     
       On Sunday, May 22, Virat remained unbeaten at 101 runs. With that news, Royal Challengers
@@ -457,6 +461,6 @@ for prompt_results in prompt_results_list:
       skills. He remained unbeaten at 104 runs in just 52 balls, leading Punjab to victory.
       As a result, Gujarat Titans not only lost the match by 6 wickets but also eliminated
       from the upcoming IPL 2023. After the match, Sourav tweeted, and that''s where the
-      new controversy began.```'
+      new controversy began."'
     
     

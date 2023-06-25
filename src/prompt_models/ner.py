@@ -4,7 +4,8 @@ from json import JSONDecodeError
 from  src.utils import get_completion
 
 def named_entities(
-    text_body: str
+    text_body: str,
+    model="gpt-3.5-turbo"
 ) -> dict:
     """Identify the named entities from the text
     
@@ -12,7 +13,8 @@ def named_entities(
     ----------
         text_body: str 
             text from which entities need to be identified
-    
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Return:
     ----------
         list: Identified entities as list
@@ -32,7 +34,7 @@ def named_entities(
     """
     
     # detect the language
-    detected_json = get_completion(prompt)
+    detected_json = get_completion(prompt, model)
     try:
         detected_dict = json.loads(detected_json)
         detected_ner = detected_dict["NER"]

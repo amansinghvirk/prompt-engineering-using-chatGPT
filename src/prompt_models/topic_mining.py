@@ -4,7 +4,8 @@ from json import JSONDecodeError
 from  src.utils import get_completion
 
 def topics(
-    text_body: str
+    text_body: str,
+    model="gpt-3.5-turbo"
 ) -> list:
     """Identify the differnet topics from the text
     
@@ -12,6 +13,8 @@ def topics(
     ----------
         text_body: str 
             text from which topics need to be identified
+        model: str
+            chat GPT model either gpt-3.5-turbo or gpt-4
     Return:
     -------
         list: Topics identified as list
@@ -29,7 +32,7 @@ def topics(
     """
     
     # detect the language
-    detected_json = get_completion(prompt)
+    detected_json = get_completion(prompt, model)
     try:
         detected_dict = json.loads(detected_json)
         detected_topics = detected_dict["Topic"]
